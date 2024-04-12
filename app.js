@@ -4,16 +4,17 @@
  *   问题 1 ： 没有安装cors，并未处理跨域问题，好像不存在  --已解决
  * 
  */
-const express = require('express')
-const path = require('path')
-const app = express()
 const cors = require('cors')
+const express = require('express')
+const history = require('connect-history-api-fallback')
+const app = express()
+const path = require('path')
 const router = require('./router/plan')
 const routerMusic = require('./router/music')
 const routerNav = require('./router/nav')
-const routerPerson = require('./router/person')
-const history = require('connect-history-api-fallback')
+const routerPerson = require('./router/person')           
 const bodyParser = require('body-parser');
+
 
 //解析表单数据 - 并加大传输限制
 // app.use(express.urlencoded({ extended: false }))
@@ -26,7 +27,7 @@ app.use(cors())
 
 //history 
 app.use(history())
-// app.use(express.static('./static'))
+app.use(express.static(path.join(__dirname, './static')))
 
 
 app.use('/api',router,routerMusic,routerNav,routerPerson)
