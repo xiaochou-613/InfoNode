@@ -12,6 +12,7 @@ const path = require('path')
 const router = require('./router/plan')
 const routerMusic = require('./router/music')
 const routerNav = require('./router/nav')
+const routerDiary = require('./router/diary')
 const routerPerson = require('./router/person')           
 const bodyParser = require('body-parser');
 
@@ -30,7 +31,7 @@ app.use(history())
 app.use(express.static(path.join(__dirname, './static')))
 
 
-app.use('/api',router,routerMusic,routerNav,routerPerson)
+app.use('/api',router,routerMusic,routerNav,routerPerson,routerDiary)
 
 
 app.listen(8080, () => {
