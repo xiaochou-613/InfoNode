@@ -31,4 +31,21 @@ router.post('/addDiary',(req,res)=>{
 })
 })
 
+//删除日记
+router.post('/deleteDiary',(req,res)=>{
+    const id = req.body.index
+    console.log(req.body.index);
+    
+    const str = `UPDATE diarylist SET isDel = 1 WHERE diaryID = ?`
+    db.query(str,[id],(err,data)=>{
+        if(err){
+            return res.send({status:404,msg:'删除失败'})
+        }
+        else if(data.affectedRows !== 1){
+            return res.send({status:404,msg:'删除失败'})
+    }
+    res.send({status:200,msg:'删除成功'})
+})
+})
+
 module.exports = router
