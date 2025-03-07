@@ -96,5 +96,18 @@ router.post('/updatePlanLevel',(req,res)=>{
   })
 })
 
+//更新提醒时间
+router.post('/updateRemindTime',(req,res)=>{
+    const str = `UPDATE plan SET alarmTime = ? WHERE planId = ?`
+    console.log(req.body);
+    
+    db.query(str,[req.body.alarmTime,req.body.planId],(err,data)=>{
+        if(err || data.affectedRows !== 1)
+            return res.send({status:404,msg:'数据更新失败'})
+        //成功
+        res.send({status:200,msg:'数据更新成功'})
+    })
+})
+
 
 module.exports = router
